@@ -76,7 +76,7 @@ sleep 4
 
 echo "|| !! BOSS BATTLE !! ||"
 
-if [[ $attack > 21 ]]; then
+if [[ $attack > 20 ]]; then
     hp=$(( $hp + 20 ))
     attack=$(( $attack + 5 ))
     beast=$(( $RANDOM % 6 ))
