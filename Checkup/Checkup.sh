@@ -20,13 +20,13 @@ echo "checking websites..."
 
 sleep 2
 
-for x in google.com xbox.com izaacweb.vercel.app github.com;
+for x in google.com xbox.com github.com izaacweb.vercel.app;
 do
-if ping -q -c 2 -w 1 $x > /dev/null; then
-  echo "$x is down"
-else
-  echo "$x is up"
-fi
+  if ping -q -c 2 -W 1 $x > /dev/null; then
+    echo "$x is up"
+  else
+    echo "$x is down"
+  fi
 done
 
 sleep 2
@@ -37,8 +37,8 @@ sleep 2
 
 for x in $(cat cities.txt);
 do
- weather=$(curl -s https://wttr.in/$x?format=3)
- echo "The weather for $weather"
+  weather=$(curl -s https://wttr.in/$x?format=3)
+  echo "The weather for $weather"
 done
 
 sleep 2
