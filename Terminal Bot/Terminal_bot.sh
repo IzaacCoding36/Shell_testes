@@ -112,7 +112,7 @@ if [[ $option = "1" || $option = "Checkup" || $option = "checkup" || $option = "
   echo ""
   echo "The system check will start in 5 seconds."
 
-#DISCLAIMER: Consider this as a joke, idk how to actually check the system using shell-script, so if you are having problems with your PC then look for help, because this isn't really going to check your computer system. (I'm sorry for this.)
+#DISCLAIMER: Consider this as a alert, idk how to actually check the system using shell-script, so if you are having problems with your PC then look for help, because this isn't really going to check your computer system. (I'm sorry for this.)
 
   sleep 1
 
