@@ -3,9 +3,17 @@
 user=$(whoami)
 date=$(date)
 whereami=$(pwd)
+hour=`date +%H`
 
-echo "Hello $user! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
-echo ""
+if [ $hour -lt 12 ]; then
+    echo "Hello $user! Good Morning! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
+elif [ $hour -le 16 ]; then
+    echo "Hello $user! Good Afternoon! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
+elif [ $hour -le 20 ]; then
+    echo "Hello $user! Good Evening! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
+else
+    echo "Hello $user! Good Night! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
+fi
 
 sleep 2
 
@@ -104,7 +112,7 @@ if [[ $option = "1" || $option = "Checkup" || $option = "checkup" || $option = "
   echo ""
   echo "The system check will start in 5 seconds."
 
-#DISCLAIMER: Consider this as a warning, idk how to actually check the system using shell-script, so if you are having problems with your PC then look for help, because this isn't really going to check your computer system. (I'm sorry for this.)
+#DISCLAIMER: Consider this as a joke, idk how to actually check the system using shell-script, so if you are having problems with your PC then look for help, because this isn't really going to check your computer system. (I'm sorry for this.)
 
   sleep 1
 
