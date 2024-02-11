@@ -17,15 +17,18 @@ fi
 
 sleep 2
 
+echo ""
 echo "Do you want a brief explanation of my funcionalities? (y/n)"
 echo ""
 
 read option
 
-if [[ $option = "Yes" || $option = "yes" || $option = "y" || $option = "Y" ]]; then
+if [[ $option == "Yes" || $option == "yes" || $option == "y" || $option == "Y" ]]; then
   echo ""
-  echo "Okay! So, actually I only have two funcionalities: the Terminal RPG and the Checkup."
+  echo "Okay! So, actually I have 4 funcionalities: the Terminal RPG, the Checkup, the Password Generator and the File Encrypter/Decrypter."
   sleep 6
+  echo ""
+  echo "1: CHECKUP"
   echo ""
   echo "The Checkup initiates my funcionality that makes a brief checkup about a few things that some people like you usually want to know:"
   sleep 6 
@@ -39,14 +42,35 @@ if [[ $option = "Yes" || $option = "yes" || $option = "y" || $option = "Y" ]]; t
   echo "The rest of the checkups I make are just normal things that you probably need, like the information about your username, what's your actual time and directory and that stuff."
   sleep 6 
   echo ""
+  echo "2: TERMINAL RPG"
+  echo ""
   echo "The Terminal RPG is just a little game for you to play when you are bored, or even if you don't have internet, also, don't worry if you lose, that happens to everyone!"
-  sleep 6 
+  sleep 6
+  echo ""
+  echo "3: PASSWORD GENERATOR"
+  echo ""
+  echo "The password generator, as its name suggests, is a funcionality where I create a password for you to use somehow in a simple and fast way. And i can also encrypt that password for you, to make it way more secure and private."
+  sleep 6
+  echo ""
+  echo "4: FILE ENCRYPTER/DECRYPTER"
+  echo ""
+  echo "In the File encrypter and decrypter funcionality you can encrypt any file that you want! For that, you must move your wanted file to the same repository as I am (right here: $whereami). And then you'll only need a password for that file and everything will be safe, right in your hands. The same works for the file decryption."
+  sleep 10
+  echo ""
+  echo "NOTE: I am only able to encrypt/decrypt files in the (.gpg) format, so if you want to decrypt a file in other formats, you should use a specified program for that."
+  sleep 10
+  echo ""
+  echo "SECURITY NOTE: I am just a scripted 'bot' that needs to be runned on your computer, anything you do with my code is of your property only. And if you lose any passwords you create, it is also your fault, don't blame me for beign rude or bad like this, like I said, I am scripted, so I can't recover anything without proper coding."
+  sleep 15
+  echo ""
+  echo "Sorry for the boring text! But it is really important, ok?"
+  sleep 3
   echo ""
   echo "That's it for now! Now let's head up to the important things. What do you want to do?"
   sleep 3
 fi
 
-if [[ $option = "No" || $option = "no" || $option = "no" || $option = "n" || $option = "N" ]]; then
+if [[ $option == "No" || $option == "no" || $option == "no" || $option == "n" || $option == "N" ]]; then
   echo ""
   echo "Okay. What do you want to do?"
 fi
@@ -57,12 +81,14 @@ echo ""
 echo "Avaible options:
   (1) - Checkup
   (2) - Terminal RPG
-  (3) - Nothing"
+  (3) - Password Generator
+  (4) - File Encrypter/Decrypter
+  (5) - Nothing"
 echo ""
 
 read option
 
-if [[ $option = "1" || $option = "Checkup" || $option = "checkup" || $option = "Check" || $option = "check" ]]; then
+if [[ $option == "1" || $option == "Checkup" || $option == "checkup" || $option == "Check" || $option == "check" ]]; then
   echo ""
   echo "Loading Checkup..."
   sleep 5
@@ -137,7 +163,7 @@ if [[ $option = "1" || $option = "Checkup" || $option = "checkup" || $option = "
   exit 1
 fi
 
-if [[ $option = "2" || $option = "Terminal RPG" || $option = "terminal RPG" || $option = "RPG" || $option = "rpg" ]]; then
+if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" || $option == "RPG" || $option == "rpg" ]]; then
   echo ""
   echo "loading Terminal RPG..."
   sleep 3
@@ -192,7 +218,7 @@ if [[ $option = "2" || $option = "Terminal RPG" || $option = "terminal RPG" || $
 
   beast=$(( $RANDOM % 2 ))
 
-  if [[ $beast == $move || $move = "/kill" ]]; then
+  if [[ $beast == $move || $move == "/kill" ]]; then
     echo ""
     echo "Beast ELIMINATED!! Congrats, fellow $user!"
   else
@@ -207,7 +233,7 @@ if [[ $option = "2" || $option = "Terminal RPG" || $option = "terminal RPG" || $
   
   read choice
 
-  if [[ $choice == "y" || $choice == "yes" ]]; then
+  if [[ $choice == "y" || $choice == "yes" || $choice == "Y" || $choice == "Yes" ]]; then
     attack=$(( $attack + 15 ))
     echo ""
     echo "Wow! You found a Shiny Magic Powered $weapon! + 15 DMG"
@@ -284,7 +310,133 @@ if [[ $option = "2" || $option = "Terminal RPG" || $option = "terminal RPG" || $
   fi
 fi
 
-if [[ $option = "3" || $option = "Nothing" || $option = "nothing" || $option = "None" || $option = "none" ]]; then
+if [[ $option == "3" || $option == "Password Generator" || $option == "password generator" || $option == "Password" || $option == "password" ]]; then
+    echo ""
+    echo "Loading Password Generator..."
+    sleep 3
+    echo ""
+    echo "Please select how large you want your password to be so I can create it. (0-100)"
+    echo ""
+
+    read length
+    
+    characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()"
+    password=$(head /dev/urandom | tr -dc "$characters" | head -c "$length")
+    
+    touch "password.txt"
+    echo ""
+    echo "Your password is: $password ||" > password.txt
+    sleep 3
+    echo ""
+    cat password.txt
+    sleep 3
+    echo ""
+    echo "Your password has been generated and added to a file named 'password.txt'."
+    sleep 3
+    echo ""
+    echo "Do you want to encypt your password? Don't worry, I can decrypt it for you later. (y/n)"
+
+    read choice
+
+    if [[ $choice == "y" || $choice == "Y" || $choice == "Yes" || $choice == "yes" ]]; then
+        echo ""
+        echo "Okay! Security comes in first place, right?"
+        sleep 3
+        echo ""
+        echo "WARNING: If a popup asking for a password appear on your screen, that's completely normal, that password will be used to decrypt your file. So, keep it safe, ok?"
+        sleep 15
+        echo ""
+        echo "Encrypting password..."
+        sleep 3
+
+        file_to_encrypt="password.txt"
+        gpg -c "$file_to_encrypt"
+
+        sleep 3
+
+        rm "password.txt"
+        
+        echo ""
+        echo "Your password has been encrypted!"
+        exit 1
+    fi
+
+    if [[ $coice == "n" || $choice == "N" || $choice == "no" || $choice == "No" ]]; then
+        echo ""
+        echo "Ok. If you need any help, you can count with me!"
+        exit 1
+    fi
+fi
+
+if [[ $option == "4" || $option == "File Encrypter/Decrypter" || $option == "Encrypter" || $option == "Decrypter" ]]; then
+  echo ""
+  echo "Loading file encrypter and decrypter..."
+  sleep 3
+  echo ""
+  echo "Note: Unfortunately I can only encrypt or decrypt a file that is in this directory at the moment."
+  sleep 3
+  echo ""
+  echo "Alright, do you want to encrypt or decrypt a file? (e/d)"
+  echo ""
+
+  read choice
+
+  if [[ $choice == "e" || $choice == "E" || $choice == "encrypt" || $choice == "Encrypt" ]]; then
+    echo ""
+    echo "Great. Tell me the name of the file and the ending of it (example: name = 'image' ending = '.png')"
+    echo ""
+
+    read file
+
+    echo ""
+    echo "Okay, a popup may show up on your screen asking for you to create a password, keep it safe, because you'll need it to decrypt that file."
+    sleep 15
+    echo ""
+    echo "Encrypting file..."
+    sleep 3
+    
+    file_to_encrypt="$file"
+    gpg -c "$file_to_encrypt"
+    
+    sleep 3
+    
+    rm "$file"
+
+    echo ""
+    echo "Your file has been encrypted!"
+    exit 1
+  fi
+
+  if [[ $choice == "d" || $choice == "D" || $choice == "decrypt" || $choice == "Decrypt" ]]; then
+    echo ""
+    echo "Great. Tell me the name of the file and the ending of it (example: name = 'image' ending = '.png')"
+    sleep 3
+    echo ""
+    echo "Note: you won't need to include the '.gpg' at the end of your encrypted file."
+    echo ""
+
+    read file
+
+    echo ""
+    echo "Okay, a popup may show up on your screen asking you for a password, that password is the one you entered before encrypting your file. If it doesn't show up, that's also okay, that also happens if your computer stored your password on it."
+    sleep 15
+    echo ""
+    echo "Decrypting file..."
+
+    encrypted_file="$file.gpg"
+    gpg -d "$encrypted_file" > "$file"
+
+    sleep 3
+
+    rm "$file.gpg"
+
+    echo ""
+    echo "Your file has been decrypted!"
+    exit 1
+  fi
+fi
+
+if [[ $option == "5" || $option == "Nothing" || $option == "nothing" || $option == "None" || $option == "none" ]]; then
   echo ""
   echo "Ok. See you in the next time!"
   exit 1
