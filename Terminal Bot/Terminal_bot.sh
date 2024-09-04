@@ -361,7 +361,7 @@ if [[ $option == "3" || $option == "Password Generator" || $option == "password 
         exit 1
     fi
 
-    if [[ $coice == "n" || $choice == "N" || $choice == "no" || $choice == "No" ]]; then
+    if [[ $choice == "n" || $choice == "N" || $choice == "no" || $choice == "No" ]]; then
         echo ""
         echo "Ok. If you need any help, you can count with me!"
         exit 1
