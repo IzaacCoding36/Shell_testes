@@ -4,6 +4,9 @@ user=$(whoami)
 date=$(date)
 whereami=$(pwd)
 hour=`date +%H`
+kernel=$(uname -r)
+
+function start() {
 
 if [ $hour -lt 12 ]; then
     echo "Hello $user! Good Morning! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
@@ -26,53 +29,85 @@ read option
 if [[ $option == "Yes" || $option == "yes" || $option == "y" || $option == "Y" ]]; then
   echo ""
   echo "Okay! So, actually I have 4 funcionalities: the Terminal RPG, the Checkup, the Password Generator and the File Encrypter/Decrypter."
+  
   sleep 6
+  
   echo ""
   echo "1: CHECKUP"
   echo ""
   echo "The Checkup initiates my funcionality that makes a brief checkup about a few things that some people like you usually want to know:"
-  sleep 6 
+  
+  sleep 6
+  
   echo ""
   echo "Websites: I can check if a website is up in the internet or if isn't working at the moment, if you want to check a website, write it in the 'websites.txt' file and I'll do the rest for you."
+  
   sleep 10
+  
   echo ""
   echo "Weather: I also check how the weather on your city is! If you want to check the weather in a specific city, write it in the 'cities.txt' file, just like the websites. And just to let you know, my results for the weather at some places aren't always correct. Don't blame me, I'm just trying to help you."
+  
   sleep 10
+  
   echo ""
   echo "The rest of the checkups I make are just normal things that you probably need, like the information about your username, what's your actual time and directory and that stuff."
-  sleep 6 
+  
+  sleep 6
+  
   echo ""
   echo "2: TERMINAL RPG"
   echo ""
   echo "The Terminal RPG is just a little game for you to play when you are bored, or even if you don't have internet, also, don't worry if you lose, that happens to everyone!"
+  
   sleep 6
+  
   echo ""
   echo "3: PASSWORD GENERATOR"
   echo ""
   echo "The password generator, as its name suggests, is a funcionality where I create a password for you to use somehow in a simple and fast way. And i can also encrypt that password for you, to make it way more secure and private."
+  
   sleep 6
+  
   echo ""
   echo "4: FILE ENCRYPTER/DECRYPTER"
   echo ""
   echo "In the File encrypter and decrypter funcionality you can encrypt any file that you want! For that, you must move your wanted file to the same repository as I am (right here: $whereami). And then you'll only need a password for that file and everything will be safe, right in your hands. The same works for the file decryption."
+  
   sleep 10
+  
   echo ""
   echo "NOTE: I am only able to encrypt/decrypt files in the (.gpg) format, so if you want to decrypt a file in other formats, you should use a specified program for that."
+  
   sleep 10
+  
   echo ""
   echo "SECURITY NOTE: I am just a scripted 'bot' that needs to be runned on your computer, anything you do with my code is of your property only. And if you lose any passwords you create, it is also your fault, don't blame me for beign rude or bad like this, like I said, I am scripted, so I can't recover anything without proper coding."
+  
   sleep 15
+  
   echo ""
   echo "Sorry for the boring text! But it is really important, ok?"
+  
   sleep 3
+  
   echo ""
   echo "That's it for now! Now let's head up to the important things. What do you want to do?"
+  
   sleep 3
-fi
 
-if [[ $option == "No" || $option == "no" || $option == "no" || $option == "n" || $option == "N" ]]; then
+elif [[ $option == "No" || $option == "no" || $option == "no" || $option == "n" || $option == "N" ]]; then
   echo ""
   echo "Okay. What do you want to do?"
+else
+  sleep 2
+  
+  echo ""
+  echo "You haven't chosen any of the avaible options. If you want to try again, type the option indicator (ex: (y) )"
+  
+  sleep 2
+  
+  echo ""
+  start
 fi
 
 sleep 2
@@ -91,6 +126,7 @@ read option
 if [[ $option == "1" || $option == "Checkup" || $option == "checkup" || $option == "Check" || $option == "check" ]]; then
   echo ""
   echo "Loading Checkup..."
+  
   sleep 5
 
   echo ""
@@ -138,7 +174,7 @@ if [[ $option == "1" || $option == "Checkup" || $option == "checkup" || $option 
   echo ""
   echo "The system check will start in 5 seconds."
 
-#DISCLAIMER: Consider this as a alert, idk how to actually check the system using shell-script, so if you are having problems with your PC then look for help, because this isn't really going to check your computer system. (I'm sorry for this.)
+#DISCLAIMER: Consider this as a alert, idk how to correctly check ALL the system using shell-script, so if you are having problems with your PC then look for help, because this isn't really going to check your computer system. (I'm sorry for this.)
 
   sleep 1
 
@@ -153,7 +189,47 @@ if [[ $option == "1" || $option == "Checkup" || $option == "checkup" || $option 
   sleep 4
 
   echo ""
-  echo "CPU Status: Operational (OK) | Battery: OK | Graphic Card: OK | Hard Drive (HD): OK | RAM: OK | Overall System Status: OK"
+  echo "CPU Status: OK"
+  
+  sleep 2
+
+  echo ""
+  echo "Battery: OK"
+
+  sleep 2
+
+  echo ""
+  echo "Graphic Card: OK"
+
+  sleep 2
+
+  echo ""
+  echo "Hard Drive (HD): OK"
+
+  sleep 2
+
+  echo ""
+  df -h | awk '$NF=="/"{printf "Hard Drive storage used: %d/%dGB (%s)\n", $3, $2, $5}'
+
+  sleep 2
+
+  echo ""
+  echo "RAM: OK"
+
+  sleep 2
+
+  echo ""
+  free -m | awk 'NR==2{printf "RAM memory used: %sMB (%.2f%%)\n", $3, $3*100/$2 }'
+
+  sleep 2
+
+  echo ""
+  echo "Kernel Version: $kernel"
+
+  sleep 2
+
+  echo ""
+  echo "Overall System Status: OK"
 
   sleep 4
 
@@ -198,8 +274,18 @@ if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" |
         ;;
   esac
 
-  echo ""
-  echo "You have chosen the $type class. Your HP is $hp and your DMG is $attack."
+  if [[ $type == "Knight" || $type == "Archer" || $type == "Mage" ]]; then
+   echo ""
+   echo "You have chosen the || $type || class. Your HP is $hp and your DMG is $attack."
+
+  else
+   echo ""
+   echo "You haven't chosen any valid options, so you suddenly just decided to get away from this game..."
+
+  sleep 2
+
+   exit 1
+  fi
 
   sleep 4
 
@@ -236,7 +322,7 @@ if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" |
   if [[ $choice == "y" || $choice == "yes" || $choice == "Y" || $choice == "Yes" ]]; then
     attack=$(( $attack + 15 ))
     echo ""
-    echo "Wow! You found a Shiny Magic Powered $weapon! + 15 DMG"
+    echo "Wow! You found a || Shiny Magic Powered $weapon ||! + 15 DMG"
     sleep 4
     echo ""
     echo "Your Damage has been increased to $attack."
@@ -255,6 +341,8 @@ if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" |
 
   echo ""
   echo "|| !! BOSS BATTLE !! ||"
+
+  sleep 2
 
   if [[ $attack > 20 ]]; then
     hp=$(( $hp + 20 ))
@@ -444,4 +532,9 @@ fi
   
   echo ""
   echo "You haven't chosen any of the avaible options. If you want to try again, type the option indicator (ex: (1) )"
-  exit 1
+  sleep 2
+  echo ""
+  start
+}
+
+start
