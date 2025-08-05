@@ -1,4 +1,8 @@
-# Shell_testes
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Orbitron&weight=500&size=17&pause=1000&color=000000&background=99FFA5&center=true&vCenter=true&width=1000&height=100&lines=Shell;Testes;Bash+Script;Terminal+Bot)](https://git.io/typing-svg)
+
+---
+
+# Shell Testes
 Este repositório foi criado para disponibilizar alguns códigos que eu criei para aprender a lidar com Terminal e scripts shell/bash.
 
 **Scripts:**
