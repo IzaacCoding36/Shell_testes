@@ -3,16 +3,16 @@
 user=$(whoami)
 date=$(date)
 whereami=$(pwd)
-hour=`date +%H`
+hour=$(date +%H)
 kernel=$(uname -r)
 
 function start() {
 
-if [ $hour -lt 12 ]; then
+if [ "$hour" -lt 12 ]; then
     echo "Hello $user! Good Morning! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
-elif [ $hour -le 16 ]; then
+elif [ "$hour" -le 16 ]; then
     echo "Hello $user! Good Afternoon! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
-elif [ $hour -le 20 ]; then
+elif [ "$hour" -le 20 ]; then
     echo "Hello $user! Good Evening! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
 else
     echo "Hello $user! Good Night! I am a terminal 'bot' made by IzaacCoding36 to offer some funcionalities for you in a very quick way!"
@@ -24,7 +24,7 @@ echo ""
 echo "Do you want a brief explanation of my funcionalities? (y/n)"
 echo ""
 
-read option
+read -r option
 
 if [[ $option == "Yes" || $option == "yes" || $option == "y" || $option == "Y" ]]; then
   echo ""
@@ -121,7 +121,7 @@ echo "Avaible options:
   (5) - Nothing"
 echo ""
 
-read option
+read -r option
 
 if [[ $option == "1" || $option == "Checkup" || $option == "checkup" || $option == "Check" || $option == "check" ]]; then
   echo ""
@@ -144,16 +144,15 @@ if [[ $option == "1" || $option == "Checkup" || $option == "checkup" || $option 
 
   sleep 2
 
-  for x in $(cat websites.txt);
-  do
-    if ping -q -c 2 -W 1 $x > /dev/null; then
+  while IFS= read -r x; do
+    if ping -q -c 2 -W 1 "$x" > /dev/null; then
     echo ""
     echo "$x is up."
    else
     echo ""
     echo "$x is down."
     fi
-  done
+  done < websites.txt
 
   sleep 2
 
@@ -162,12 +161,11 @@ if [[ $option == "1" || $option == "Checkup" || $option == "checkup" || $option 
 
   sleep 2
 
-  for x in $(cat cities.txt);
-  do
-   weather=$(curl -s https://wttr.in/$x?format=3)
+  while IFS= read -r x; do
+   weather=$(curl -s "https://wttr.in/$x?format=3")
    echo ""
    echo "The weather for: $weather"
-  done
+  done < cities.txt
 
   sleep 2
 
@@ -250,7 +248,7 @@ if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" |
 (3) - Mage"
   echo ""
   
-  read class
+  read -r class
 
   case $class in
 
@@ -300,11 +298,11 @@ if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" |
   echo "Your first beast approaches. Prepare to battle. Pick a number between 0-1 (0/1)"
   echo ""
   
-  read move
+  read -r move
 
-  beast=$(( $RANDOM % 2 ))
+  beast=$((RANDOM % 2))
 
-  if [[ $beast == $move || $move == "/kill" ]]; then
+  if [[ $beast == "$move" || $move == "/kill" ]]; then
     echo ""
     echo "Beast ELIMINATED!! Congrats, fellow $user!"
   else
@@ -317,10 +315,10 @@ if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" |
   echo "You can see a blue light shining ahead of you. Do you want to look what's over there? (y/n)"
   echo ""
   
-  read choice
+  read -r choice
 
   if [[ $choice == "y" || $choice == "yes" || $choice == "Y" || $choice == "Yes" ]]; then
-    attack=$(( $attack + 15 ))
+    attack=$((attack + 15))
     echo ""
     echo "Wow! You found a || Shiny Magic Powered $weapon ||! + 15 DMG"
     sleep 4
@@ -344,10 +342,10 @@ if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" |
 
   sleep 2
 
-  if [[ $attack > 20 ]]; then
-    hp=$(( $hp + 20 ))
-    attack=$(( $attack + 5 ))
-    beast=$(( $RANDOM % 6 ))
+  if [[ $attack -gt 20 ]]; then
+    hp=$((hp + 20))
+    attack=$((attack + 5))
+    beast=$((RANDOM % 6))
     echo ""
     echo "Your $weapon lightens you up and you get powerful. + 20 HP, + 5 DMG"
     sleep 4
@@ -361,30 +359,30 @@ if [[ $option == "2" || $option == "Terminal RPG" || $option == "terminal RPG" |
     echo "Get ready to fight and pick a number between 0-5 (0/5)"
     echo ""
 
-  read move
+  read -r move
 
-  if [[ $beast == $move || $move == "/nuke" ]]; then
+  if [[ $beast == "$move" || $move == "/nuke" ]]; then
     echo ""
     echo "Boss ELIMINATED!! Congrats, fellow $user!"
     sleep 4
     echo ""
     echo "YOU WON!!!"
     exit 1
-  elif [[ $beast != $move && $move != "/nuke" && $attack > 21 ]]; then
+  elif [[ $beast != "$move" && $move != "/nuke" && $attack -gt 21 ]]; then
     echo ""
     echo "You Died."
     exit 1
   fi
   fi
 
-  beast=$(( $RANDOM % 10 ))
+  beast=$((RANDOM % 10))
   
   echo ""
   echo "Get ready to fight and pick a number between 0-9 (0/9)"
 
-  read move
+  read -r move
 
-  if [[ $beast == $move || $move == "/nuke" ]]; then
+  if [[ $beast == "$move" || $move == "/nuke" ]]; then
     echo ""
     echo "Boss ELIMINATED!! Congrats, fellow $user!"
     sleep 4
@@ -406,7 +404,7 @@ if [[ $option == "3" || $option == "Password Generator" || $option == "password 
     echo "Please select how large you want your password to be so I can create it. (0-100)"
     echo ""
 
-    read length
+    read -r length
     
     characters="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()"
     password=$(head /dev/urandom | tr -dc "$characters" | head -c "$length")
@@ -424,7 +422,7 @@ if [[ $option == "3" || $option == "Password Generator" || $option == "password 
     echo ""
     echo "Do you want to encypt your password? Don't worry, I can decrypt it for you later. (y/n)"
 
-    read choice
+    read -r choice
 
     if [[ $choice == "y" || $choice == "Y" || $choice == "Yes" || $choice == "yes" ]]; then
         echo ""
@@ -467,14 +465,14 @@ if [[ $option == "4" || $option == "File Encrypter/Decrypter" || $option == "Enc
   echo "Alright, do you want to encrypt or decrypt a file? (e/d)"
   echo ""
 
-  read choice
+  read -r choice
 
   if [[ $choice == "e" || $choice == "E" || $choice == "encrypt" || $choice == "Encrypt" ]]; then
     echo ""
     echo "Great. Tell me the name of the file and the ending of it (example: name = 'image' ending = '.png')"
     echo ""
 
-    read file
+    read -r file
 
     echo ""
     echo "Okay, a popup may show up on your screen asking for you to create a password, keep it safe, because you'll need it to decrypt that file."
@@ -503,7 +501,7 @@ if [[ $option == "4" || $option == "File Encrypter/Decrypter" || $option == "Enc
     echo "Note: you won't need to include the '.gpg' at the end of your encrypted file."
     echo ""
 
-    read file
+    read -r file
 
     echo ""
     echo "Okay, a popup may show up on your screen asking you for a password, that password is the one you entered before encrypting your file. If it doesn't show up, that's also okay, that also happens if your computer stored your password on it."
